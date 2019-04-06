@@ -32,7 +32,6 @@ namespace C0732169_Assignment4
                 {
                     Console.WriteLine(ln);
                     Beowulf.Add(ln);
-
                 }
                 file.Close();
                 Console.WriteLine($"File has {counter} lines.");
@@ -92,6 +91,28 @@ namespace C0732169_Assignment4
                 }
             }
             Console.WriteLine(f);
+        }
+        public void Wordskipper()
+        {
+            int f = 0;
+            int m = 0;
+            int n = 0;
+            foreach (var line in File.ReadAllLines(@"C:\Area\beowulf.txt"))
+            {
+                if (line.Contains("fare"))
+                {
+                    f++;
+                }
+            }
+            foreach (var line in File.ReadAllLines(@"C:\Area\beowulf.txt"))
+            {
+                if (line.Contains("war") && line.Contains("fare"))
+                {
+                    m++;
+                }
+            }
+            n = f - m;
+            Console.WriteLine(n);
         }
     }
 }
