@@ -28,32 +28,70 @@ namespace C0732169_Assignment4
             {
                 int counter = 0;
                 string ln;
-
                 while ((ln = file.ReadLine()) != null)
                 {
                     Console.WriteLine(ln);
                     Beowulf.Add(ln);
-                    counter++;
+
                 }
                 file.Close();
                 Console.WriteLine($"File has {counter} lines.");
-                Console.WriteLine($"File has {counter*5} Words.");
             }
         }
-
         public int FindNumberOfBlankSpaces(string line)
         {
-            // https://stackoverflow.com/questions/17812566/count-words-and-spaces-in-string-c-sharp //
             int countletters = 0;
             int countSpaces = 0;
-
-            foreach (char c in line)
             {
-                if (char.IsLetter(c)) { countletters++; }
-                if (char.IsWhiteSpace(c)) { countSpaces++; }
+                foreach (char c in line)
+                {
+                    if (char.IsLetter(c)) { countletters++; }
+                    if (char.IsWhiteSpace(c)) { countSpaces++; }
+                }
+                return countSpaces;
             }
-            return countSpaces;
+        }
+        public void CountLinesReader()
+        {
+            long lineCounter = 0;
+            using (StreamReader fil = new StreamReader(@"C:\Area\beowulf.txt"))
+            {
+                while (fil.ReadLine() != null)
+                {
+                    lineCounter++;
+                }
+                Console.WriteLine(lineCounter);
+            }
+        }
+        public void WordCounter()
+        {
+            StreamReader reader = new StreamReader(@"C:\Area\beowulf.txt");
+            string script = reader.ReadToEnd();
+            var text = script.Trim();
+            int wordCount = 0, index = 0;
+            while (index < text.Length)
+            {
+                // check if current char is part of a word 
+                while (index < text.Length && !char.IsWhiteSpace(text[index]))
+                    index++;
+                wordCount++;
+                // skip whitespace until next word
+                while (index < text.Length && char.IsWhiteSpace(text[index]))
+                    index++;
+            }
+            Console.WriteLine(wordCount);
+        }
+        public void Wordfinder()
+        {
+            int f = 0;
+            foreach (var line in File.ReadAllLines(@"C:\Area\beowulf.txt"))
+            {
+                if (line.Contains("sea") && line.Contains("fare"))
+                {
+                    f++;
+                }
+            }
+            Console.WriteLine(f);
         }
     }
 }
-+
